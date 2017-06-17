@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.xujiyao.jdporxy.dao.JDDao">
+
+
+    <select id="findAllBooks" resultType="map" >
+          SELECT * FROM jd_proxy
+    </select>
+
+    <delete id="deleteBookById" parameterType="string">
+        DELETE FROM jd_proxy
+        WHERE bookid = #{bookID}
+    </delete>
+
+    <insert id="addBook" parameterType="com.xujiyao.jdporxy.eniity.JDEntity">
+        INSERT INTO jd_proxy
+        VALUES (#{bookID} , #{bookName} , #{bookPrice} )
+    </insert>
+
+    <insert id="batchInsertBook" parameterType="java.util.List">
+        insert into jd_proxy
+        values
+        <foreach collection="list" item="item" index="index" separator="," >
+            (#{item.bookID},
+            #{item.bookName},
+            #{item.bookPrice},
+            #{item.imgsrc})
+        </foreach>
+    </insert>
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
